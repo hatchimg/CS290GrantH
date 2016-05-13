@@ -24,26 +24,20 @@ app.get('/',function(req,res){
 });
 
 app.post('/',function(req,res){
-//For values in URL
-if(req.query != NULL){
-	var parameters1 = [];
-	for (var info in req.query){
-		parameters1.push({'attribute': info, 'value': req.query[info]})
-	}
-	var theContext1 = {};
-	theContext1.reqList = parameters1;
-	res.render('post', theContext1);
-}
-else{
-//For values in body
+
   var parameters = [];
 	for (var info in req.body){
 		parameters.push({'attribute': info, 'value': req.body[info]})
 	}
+	var qParameters = [];
+	for (var qInfo in req.query){
+		qParameters.push({'attribute': qInfo, 'values': req.query[qInfo]})
+	}
 	var postContext = {};
+	postContext.qReqList = qParameters;
 	postContext.reqList = parameters;
 	res.render('post', postContext);
-}});
+});
 
 app.use(function(req,res){
   res.type('text/plain');
