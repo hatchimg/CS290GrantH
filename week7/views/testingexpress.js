@@ -15,7 +15,7 @@ app.get('/getRequest',function(req,res){
 	}
 	var theContext = {};
 	theContext.reqList = parameters;
-	res.render('get', 'theContext');
+	res.render('get', theContext);
 });
 
 app.get('/other-page',function(req,res){
