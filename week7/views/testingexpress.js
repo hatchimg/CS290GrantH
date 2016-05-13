@@ -11,9 +11,9 @@ app.set('port', 3000);
 app.get('/getRequest',function(req,res){
 	var parameters = [];
 	for (var info in req.query){
-		parameters.push = {'attribute': info, 'value': req.query[info]}
+		parameters.push({'attribute': info, 'value': req.query[info]})
 	}
-	var theContext = {}
+	var theContext = {};
 	theContext.reqList = parameters;
 	res.render('get', 'theContext');
 });
