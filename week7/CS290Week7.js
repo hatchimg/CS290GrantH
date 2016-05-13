@@ -31,7 +31,7 @@ app.post('/',function(req,res){
 	}
 	var qParameters = [];
 	for (var qInfo in req.query){
-		qParameters.push({'attribute': qInfo, 'values': req.query[qInfo]})
+		qParameters.push({'attribute': qInfo, 'value': req.query[qInfo]})
 	}
 	var postContext = {};
 	postContext.qReqList = qParameters;
