@@ -1,8 +1,9 @@
 <h1>Welcome {{name}}, here is your to-do list:</h1>
-<h2>You have {{toDo.count}} items on your to-do list.</h2>
+<h2>You have {{toDoCount}} items on your to-do list.</h2>
 
 <form method = "post">
 	<input type = "text" name = "newItem" id = "addNew"></input>
+	<input type = "text" name = "itemCity" id = "itemCity"></input>
 	<input type = "submit" name = "submitNew" value = "Add new item"></input>
 
 </form>
@@ -11,7 +12,7 @@
 <ul>
 	{{#each toDo}}
 	<li>
-	<h3>{{this.name}}</h3>
+	<h3>{{this.name}}, {{this.temp}}</h3>
 	<form method = "post">
 	<input type = "hidden" name = "id" value = "{{this.id}}">
 	<input type = "submit" name = "Done" value = "Mark as done">
