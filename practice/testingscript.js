@@ -13,7 +13,7 @@ app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 app.set("port", 2000);
 
-app.get("/", function(req, res){
+app.get("/", function(req, res, next){
 	var context = {};
 	if(!req.session.name){
 		res.render("homepage", context);
@@ -29,7 +29,7 @@ app.get("/", function(req, res){
 app.post("/", function(req, res){
 	var context = {};
 	
-	if(req.body = ["newList"]){
+	if(req.body = ["submitName"]){
 		req.session.name = req.body.name;
 		req.session.toDo = [];
 		req.session.curId = 0;
@@ -40,7 +40,7 @@ app.post("/", function(req, res){
 		return;
 	}
 	if(req.body = ["submitNew"]){
-		req.session.toDo.push({"name" = req.body.newItem, "id" = req.session.curId})
+		req.session.toDo.push({"name": req.body.newItem, "id": req.session.curId})
 		req.session.curId++;
 	}
 	
