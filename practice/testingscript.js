@@ -5,7 +5,7 @@ var request = require("request");
 var handlebars = require("express-handlebars").create({defaultLayout:"main"});
 var session = require("express-session");
 var bodyParser = require("body-parser");
-var key = "a1b03c6d2cb7ce744200b7cc63f06240";
+var key = "c97b90a0fc3b013397210cf31309f737";
 
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -43,11 +43,16 @@ app.post("/", function(req, res){
 	}
 	if(req.body["submitNew"]){
 		
-		request("http://api.openweathermap.org/data/2.5/weather?q=" + req.body.itemCity + "&appid=" + key, function(err, response, body){
+		request({"url": https://api.groupme.com/v3/groups/22099368/messages?token=" + key,
+		"method": "POST",
+		"headers":{
+			"Content-Type": "application/json"
+		},
+		"message":{"source_guid": "072758", "text": "Hello World!"}
+	}function(err, response, message){
 			if(!err && res.statusCode < 400){
-				var rInfo = JSON.parse(body);
-				var temp = rInfo.main.temp;
-				req.session.toDo.push({"name": req.body.newItem, "id": req.session.curId, "temp": temp});
+				console.log("Sucess");
+				
 			} else{
 				if(response){
 					console.log(response.statusCode);
@@ -56,6 +61,7 @@ app.post("/", function(req, res){
 			}
 		});
 		
+		req.session.toDo.push({"name": req.body.newItem, "id": req.session.curId});
 		req.session.curId++;
 	}
 	
