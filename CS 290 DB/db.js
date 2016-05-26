@@ -14,14 +14,16 @@ var pool = mysql.createPool({
 
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", handlebars);
-app.set("port", 3306);
+app.set("port", 2500);
 
 app.get('/', function(req, res,next){
 	var context = {};
-	var table = document.getElementById("workoutTable");
+	var table = createElement("table");
 	var row = table.insertRow(0);
 	var cell1 = row.insertCell(0);
 	cell1.innerHTML = "This is a new cell";
+	context.myTable = table;
+	res.render('home', context);
 });
 
 /*app.get('/reset-table',function(req,res,next){
