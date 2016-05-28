@@ -18,10 +18,15 @@ app.set("port", 2500);
 
 app.get("/", function(req, res, next){
 	var context = {};
-	var currentTable = JSON.stringify(pool.query("SELECT * FROM workout"));
+	pool.query("SELECT * FROM workout", function(err, rows, fields){
+		if(err){
+			next(err);
+			return;
+		}
 	
-	context.table = currentTable;
-	res.render("home", context);
+	context.table = JSON.stringify(rows);
+	res.render("dbandui", context);
+	});
 	
 });
 
