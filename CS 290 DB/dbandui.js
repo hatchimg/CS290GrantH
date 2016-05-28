@@ -23,7 +23,7 @@ app.get("/", function(req, res, next){
 			next(err);
 			return;
 		}
-	var temp = JSON.stringify.(rows);
+	var temp = JSON.stringify(rows);
 	var data = JSON.parse(temp);
 	context.table = data;
 	res.render("dbandui", context);
@@ -33,15 +33,24 @@ app.get("/", function(req, res, next){
 
 
 app.get("/add-item", function(req, res, next){
+	var context = {};
+	var payload = {
+		name: req.query.name,
+		reps: req.query.reps,
+		weight: req.query.weight,
+		date: req.query.date,
+		lbs: req.query.lbs
+	}
 	
-	
-	pool.query("INSERT INTO workouts (name, reps, weight, date, lbs) VALUES (?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
+	pool.query("INSERT INTO workouts SET ?", payload, function(err, result){
 		if(err){
 			next(err);
 			return;
 		}
+		
+		context.results = "Inserted ID " + result.insertId;
+		res.render("added", context);
 	});
-	console.log("Row added succesfully. New ID is " + result.insertID);
 	
 });
 
