@@ -23,8 +23,9 @@ app.get("/", function(req, res, next){
 			next(err);
 			return;
 		}
-	
-	context.table = JSON.stringify(rows);
+	var temp = JSON.stringify.(rows);
+	var data = JSON.parse(temp);
+	context.table = data;
 	res.render("dbandui", context);
 	});
 	
@@ -98,7 +99,7 @@ function addRow(){
 	}
 	
 
-});
+}
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
