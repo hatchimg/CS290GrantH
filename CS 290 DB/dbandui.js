@@ -67,7 +67,7 @@ function addRow(){
 	var type = document.getElementById("unit");
 	
 	var req = new XMLHttpRequest();
-	req.open("GET", "52.32.212.47:2500/add-item?name=" + name + "reps=" + reps + "weight=" + weight + "&date=" + date + "&lbs=" + type, true);
+	req.open("GET", "http://52.32.212.47:2500/add-item?name=" + name + "reps=" + reps + "weight=" + weight + "&date=" + date + "&lbs=" + type, true);
 	req.send(null);
 	
 	if(req.status >= 200 && req.status < 400){
