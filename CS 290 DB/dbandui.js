@@ -33,7 +33,7 @@ app.get("/", function(req, res, next){
 
 app.get("/add-item", function(req, res, next){
 	
-	var context = {};
+	
 	pool.query("INSERT INTO workouts (name, reps, weight, date, lbs) VALUES (?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
 		if(err){
 			next(err);
@@ -41,10 +41,10 @@ app.get("/add-item", function(req, res, next){
 		}
 	});
 	console.log("Row added succesfully. New ID is " + result.insertID);
-	res.render("dbandui", context);
+	
 });
 
-document.getElementById("submitEx").addEventListener("click", function(event){
+function addRow(){
 
 	if(document.getElementById("name").value == ""){
 		alert("Name must be filled out.");
@@ -97,7 +97,6 @@ document.getElementById("submitEx").addEventListener("click", function(event){
 		console.log("Row not successfully added. Error code " + req.status);
 	}
 	
-	event.preventDefault();
 
 });
 
