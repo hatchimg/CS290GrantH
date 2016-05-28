@@ -1,6 +1,10 @@
 var express = require("express");
 var app = express();
 var mysql = require("mysql");
+var handlebars = require("express-handlebars").create({defaultLayout: "main"});
+app.engine("handlebars", handlebars.engine);
+
+
 var pool = mysql.createPool({
 	
 	host  : 'localhost',
@@ -8,13 +12,16 @@ var pool = mysql.createPool({
 	password: 'default',
 	database: 'workout'
 });
+
+app.set("view engine", "handlebars");
 app.set("port", 2500);
 
 app.get("/", function(req, res, next){
-	
+	var context = {};
 	var currentTable = JSON.stringify(pool.query("SELECT * FROM workout"));
-	res.type("text/plain");
-	res.send(currentTable);
+	
+	context.table = currentTable;
+	res.render("home", context);
 	
 });
 
@@ -84,6 +91,23 @@ function addRow(tableID){
 	
 	//add event listener to prevent default
 }
+
+app.get('/reset-table',function(req,res,next){
+  var context = {};
+  pool.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
+    var createString = "CREATE TABLE workouts("+
+    "id INT PRIMARY KEY AUTO_INCREMENT,"+
+    "name VARCHAR(255) NOT NULL,"+
+    "reps INT,"+
+    "weight INT,"+
+    "date DATE,"+
+    "lbs BOOLEAN)";
+    pool.query(createString, function(err){
+      context.results = "Table reset";
+      res.render('home',context);
+    })
+  });
+});
 
 app.listen(app.get("port"), function(){
 	console.log("Express started, press Ctrl-C to exit.");

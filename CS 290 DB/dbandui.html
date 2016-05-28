@@ -1,9 +1,4 @@
-<html>
-<head>
-	<title>Workout Tracker</title>
-	<script src = "dbandui.js"></script>
-</head>
-<body>
+
 
 <h1>Welcome to your workout tracker</h1>
  
@@ -29,7 +24,7 @@
 	<th>Lbs or Kgs?</th>
 	</tr>
 	
-	{{#each currentTable}}
+	{{#each table}}
 	<tr>
 	<td>{{this.name}}</td>
 	<td>{{this.reps}}</td>
@@ -41,6 +36,3 @@
 
 </table>
 
-
-</body>
-</html>
