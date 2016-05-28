@@ -6,11 +6,11 @@ app.engine("handlebars", handlebars.engine);
 
 
 var pool = mysql.createPool({
-	
+	connectionLimit: '10',
 	host  : 'localhost',
 	user  : 'student',
 	password: 'default',
-	database: 'workout'
+	database: 'student'
 });
 
 app.set("view engine", "handlebars");
@@ -18,7 +18,7 @@ app.set("port", 2500);
 
 app.get("/", function(req, res, next){
 	var context = {};
-	pool.query("SELECT * FROM workout", function(err, rows, fields){
+	pool.query("SELECT * FROM workouts", function(err, rows, fields){
 		if(err){
 			next(err);
 			return;
@@ -32,17 +32,20 @@ app.get("/", function(req, res, next){
 
 
 app.get("/add-item", function(req, res, next){
-
-	pool.query("INSERT INTO workout (name, reps, weight, date, lbs) VALUES (?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
+	
+	var context = {};
+	pool.query("INSERT INTO workouts (name, reps, weight, date, lbs) VALUES (?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
 		if(err){
 			next(err);
 			return;
 		}
 	});
 	console.log("Row added succesfully. New ID is " + result.insertID);
+	res.render("dbandui", context);
 });
 
-function addRow(tableID){
+document.getElementById("submitEx").addEventListener("click", function(event){
+
 	if(document.getElementById("name").value == ""){
 		alert("Name must be filled out.");
 		return;
@@ -54,7 +57,7 @@ function addRow(tableID){
 	var type = document.getElementById("unit");
 	
 	var req = new XMLHttpRequest();
-	req.open("GET", "52.32.212.47/add-item?name=" + name + "reps=" + reps + "weight=" + weight + "&date=" + date + "&lbs=" + type, true);
+	req.open("GET", "52.32.212.47:2500/add-item?name=" + name + "reps=" + reps + "weight=" + weight + "&date=" + date + "&lbs=" + type, true);
 	req.send(null);
 	
 	if(req.status >= 200 && req.status < 400){
@@ -88,14 +91,15 @@ function addRow(tableID){
 	newRow.appendChild("typeCell")
 	
 	
-	tableID.appendChild(newRow);
+	getElementById("myTable").appendChild(newRow);
 	}
 	else{
 		console.log("Row not successfully added. Error code " + req.status);
 	}
 	
-	//add event listener to prevent default
-}
+	event.preventDefault();
+
+});
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
