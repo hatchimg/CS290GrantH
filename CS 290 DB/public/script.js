@@ -1,6 +1,26 @@
-$.get("http://localhost:2500/all", function(data,status){
-	createTable(JSON.parse(data));
-});
+document.addEventListener("DOMContentLoaded", loadTable);
+
+function loadTable(){
+
+var req = new XMLHttpRequest();
+
+req.open("get", "http://localhost:2500/all", true);
+
+req.addEventListener('load', function(){
+		if(req.status >= 200 && req.status < 400){
+			var res = JSON.parse(req.responseText);
+			createTable(res);
+		}
+		
+		else{
+			console.log("Error in network request: " + req.statusText);
+		}
+		
+	});
+	req.send(null);
+
+}
+
 
 function addRow(event){
 
