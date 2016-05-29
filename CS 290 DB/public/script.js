@@ -4,7 +4,7 @@ function loadTable(){
 
 var req = new XMLHttpRequest();
 
-req.open("get", "http://localhost:2500/all", true);
+req.open("get", "http://52.32.212.47:2500/all", true);
 
 req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
@@ -42,12 +42,12 @@ function addRow(){
 	payload.type = type;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://localhost:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + type, true);
+	req.open("POST", "http://52.32.212.47:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + type, true);
 	
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
-			createTable(res);
+			updateTable(res);
 		}
 		
 		else{
@@ -60,6 +60,20 @@ function addRow(){
 		
 	
 	};
+	
+function updateTable(info){
+	
+		var newRow = document.createElement("TR");
+	
+		for(r in info[0]){
+			var newCell = document.createElement("TD");
+			newCell.innerHTML = info[0][r];
+			newRow.appendChild(newCell);
+		}
+		document.getElementById("myTable").appendChild(newRow);
+	}
+	
+}
 	
 function createTable(info){
 	
