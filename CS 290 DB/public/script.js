@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", loadTable);
 
+
+
 function loadTable(){
 
 var req = new XMLHttpRequest();
@@ -73,12 +75,12 @@ function updateTable(info){
 		document.getElementById("myTable").appendChild(newRow);
 	}
 	
-}
 	
 function createTable(info){
 	
 	var myTable = document.createElement("TABLE");
-	document.getElementById("tablehere").appendChild(myTable);
+	document.getElementById("tablehere").appendChild(myTable);	
+
 	
 	for(p in info){
 	var newRow = document.createElement("TR");
@@ -88,7 +90,7 @@ function createTable(info){
 			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
 		}
-		myTable.appendChild(newRow);
+		document.getElementById("myTable").appendChild(newRow);
 	}
 		
 	}
