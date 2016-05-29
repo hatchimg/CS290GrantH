@@ -67,6 +67,8 @@ function deleteRow(theRow){
 	
 	var req = new XMLHttpRequest();
 	req.open("GET", "http://52.32.212.47:2500/delete-row?id=" + theRow, true);
+	
+	req.addEventListener('load', function(){
 	if(req.status >= 200 && req.status < 400)
 	{
 		var res = JSON.parse(req.responseText);
@@ -75,6 +77,7 @@ function deleteRow(theRow){
 	else{
 		console.log("Error in network request: " + req.statusText);
 	}
+	});
 }
 	
 /*function updateTable(info){
@@ -125,7 +128,7 @@ function createTable(info){
 		
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.setAttribute("onclick", deleteRow(info[p].id));
+		deleteButton.setAttribute("onclick", 'deleteRow(deleteButton.id);');
 		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
