@@ -18,6 +18,12 @@ app.set("view engine", "handlebars");
 app.set("port", 2500);
 
 app.get("/", function(req, res, next){
+	
+	res.render("dbandui");
+	
+});
+
+app.get("/all", function(req, res, next){
 	var context = {};
 	pool.query("SELECT * FROM workouts", function(err, rows, fields){
 		if(err){

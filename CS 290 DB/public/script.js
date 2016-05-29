@@ -1,4 +1,4 @@
-$.get("http://localhost:2500/home.html", function(data,status){
+$.get("http://localhost:2500/all", function(data,status){
 	createTable(JSON.parse(data));
 });
 
