@@ -1,3 +1,7 @@
+$.get("http://localhost:2500/", function(data,status){
+	createTable(JSON.parse(data));
+});
+
 function addRow(event){
 
 	if(document.getElementById("name").value == ""){
@@ -23,8 +27,25 @@ function addRow(event){
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
-			for(p in res){
-				var newRow = document.createElement("TR");
+			createTable(res);
+		}
+		
+		else{
+			console.log("Error in network request: " + req.statusText);
+		}
+		
+	});
+	
+	req.send(JSON.stringify(payload));
+	event.preventDefault();
+		
+	
+	};
+	
+function createTable(info){
+			
+	for(p in info){
+	var newRow = document.createElement("TR");
 	
 	//name
 	var nameCell = document.createElement("TD");
@@ -54,15 +75,4 @@ function addRow(event){
 	
 	getElementById("myTable").appendChild(newRow);
 			}
-		}
-		else{
-			console.log("Error in network request: " + req.statusText);
-		}
-		
-	});
-	
-	req.send(JSON.stringify(payload));
-	event.preventDefault();
-		
-	
-	};
+			}

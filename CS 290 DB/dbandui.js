@@ -24,10 +24,7 @@ app.get("/", function(req, res, next){
 			next(err);
 			return;
 		}
-	var temp = JSON.stringify(rows);
-	var data = JSON.parse(temp);
-	context.table = data;
-	res.render("dbandui", context);
+	res.send(JSON.stringify(rows));
 	});
 	
 });
