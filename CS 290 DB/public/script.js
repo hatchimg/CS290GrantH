@@ -49,6 +49,7 @@ function addRow(){
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
+			console.log(res);
 			updateTable(res);
 		}
 		
@@ -86,6 +87,10 @@ function createTable(info){
 			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
 		}
+		var deleteButton = document.createElement("button");
+		var updateButton = document.createElement("button");
+		newRow.appendChild(deleteButton);
+		newRow.appendChild(updateButton);
 		document.getElementById("myTable").appendChild(newRow);
 	}
 		
