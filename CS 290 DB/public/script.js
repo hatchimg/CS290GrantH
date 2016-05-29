@@ -1,4 +1,4 @@
-$.get("http://localhost:2500/", function(data,status){
+$.get("http://localhost:2500/home.html", function(data,status){
 	createTable(JSON.parse(data));
 });
 
@@ -43,36 +43,18 @@ function addRow(event){
 	};
 	
 function createTable(info){
-			
+	
+	var myTable = document.createElement("TABLE");
+	
 	for(p in info){
 	var newRow = document.createElement("TR");
 	
-	//name
-	var nameCell = document.createElement("TD");
-	nameCell.innerHTML = p.name;
-	newRow.appendChild("nameCell")
-	
-	//reps
-	var repsCell = document.createElement("TD");
-	repsCell.innerHTML = p.reps;
-	newRow.appendChild("repsCell")
-	
-	//weight
-	var weightCell = document.createElement("TD");
-	weightCell.innerHTML = p.weight;
-	newRow.appendChild("weightCell")
-	
-	//date
-	var dateCell = document.createElement("TD");
-	dateCell.innerHTML = p.date;
-	newRow.appendChild("dateCell")
-	
-	//type
-	var typeCell = document.createElement("TD");
-	typeCell.innerHTML = p.type;
-	newRow.appendChild("typeCell")
-	
-	
-	getElementById("myTable").appendChild(newRow);
-			}
-			}
+		for(r in info[p]){
+			var newCell = document.createElement("TD");
+			newCell.innerHTML = info[p][r];
+			newRow.appendChild(newCell);
+		}
+		myTable.appendRow(newRow);
+	}
+		
+	}
