@@ -1,4 +1,4 @@
-
+<script src = "script.js"></script>
 
 <h1>Welcome to your workout tracker</h1>
  
@@ -10,7 +10,7 @@
 		Weight: <input type = "text" name = "weight" id = "weight"></input><br><br>
 		Date (YYYY-MM-DD): <input type = "text" name = "date" id = "date"></input><br><br>
 		Lbs/Kgs: <input type = "radio" name = "unit" value = "1"></input>Lbs <input type = "radio" name = "unit" value = "0"></input> Kgs <br><br>
-		<input type = "button" name = "submitEx" value = "Add exercise"></input>
+		<input type = "button" name = "submitEx" value = "Add exercise" onclick = "addRow()"></input>
 
 </fieldset>
 </form>
@@ -32,6 +32,8 @@
 	<td>{{this.weight}}</td>
 	<td>{{this.date}}</td>
 	<td>{{this.type}}</td>
+	<td><input type = "button" name = "updateEx" value = "Update exercise"></input></td>
+	<td><input type = "button" name = "deleteEx" value = "Delete exercise"></input></td>
 	</tr>
 	{{/each}}
 
