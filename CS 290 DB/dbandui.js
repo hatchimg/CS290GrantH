@@ -36,8 +36,8 @@ app.get("/all", function(req, res, next){
 });
 
 
-app.get("/add-item", function(req, res, next){
-	var context = {};
+app.post("/add-item", function(req, res, next){
+	
 	var payload = {
 		name: req.query.name,
 		reps: req.query.reps,
@@ -46,14 +46,14 @@ app.get("/add-item", function(req, res, next){
 		lbs: req.query.lbs
 	}
 	
-	pool.query("INSERT INTO workouts SET ?", payload, function(err, result){
+	pool.query("INSERT INTO workouts SET ?", payload, function(err, rows, fields){
 		if(err){
 			next(err);
 			return;
 		}
 		
-		context.results = "Inserted ID " + result.insertId;
-		res.render("added", context);
+
+		res.send(JSON.stringify(rows));
 	});
 	
 });

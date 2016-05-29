@@ -22,7 +22,7 @@ req.addEventListener('load', function(){
 }
 
 
-function addRow(event){
+function addRow(){
 
 	if(document.getElementById("name").value == ""){
 		alert("Name must be filled out.");
@@ -57,7 +57,6 @@ function addRow(event){
 	});
 	
 	req.send(JSON.stringify(payload));
-	event.preventDefault();
 		
 	
 	};
@@ -65,6 +64,7 @@ function addRow(event){
 function createTable(info){
 	
 	var myTable = document.createElement("TABLE");
+	document.getElementById("tablehere").appendChild(myTable);
 	
 	for(p in info){
 	var newRow = document.createElement("TR");
@@ -74,7 +74,7 @@ function createTable(info){
 			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
 		}
-		myTable.appendRow(newRow);
+		myTable.appendChild(newRow);
 	}
 		
 	}
