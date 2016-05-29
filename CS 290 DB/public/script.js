@@ -78,10 +78,6 @@ function updateTable(info){
 	
 function createTable(info){
 	
-	var myTable = document.createElement("TABLE");
-	document.getElementById("tablehere").appendChild(myTable);	
-
-	
 	for(p in info){
 	var newRow = document.createElement("TR");
 	
