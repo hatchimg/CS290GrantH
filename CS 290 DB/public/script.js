@@ -112,7 +112,7 @@ function deleteRow(theRow){
 function createTable(info){
 
 	var myNode = document.getElementById("myTable");
-	while(myNode.firstChild){
+	while(myNode.firstChild.firstChild.innerHTML >= 1 ){
 		myNode.removeChild(myNode.firstChild);
 	}
 	for(p in info){
@@ -128,7 +128,7 @@ function createTable(info){
 		
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.setAttribute("onclick", 'deleteRow(deleteButton.id);');
+		deleteButton.addEventListener('click', deleteRow(info[p].id));
 		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
