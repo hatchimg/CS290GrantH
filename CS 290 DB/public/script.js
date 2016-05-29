@@ -112,11 +112,12 @@ function deleteRow(theRow){
 function createTable(info){
 
 	var myNode = document.getElementById("myTable");
-	while(myNode.firstChild.firstChild.innerHTML >= 1 ){
-		myNode.removeChild(myNode.firstChild);
+	while(myNode.lastChild.textContent == "row" ){
+		myNode.removeChild(myNode.lastChild);
 	}
 	for(p in info){
 	var newRow = document.createElement("TR");
+	newRow.textContent = "row";
 	
 		for(r in info[p]){
 			var newCell = document.createElement("TD");
