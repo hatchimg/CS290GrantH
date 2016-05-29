@@ -49,8 +49,7 @@ function addRow(){
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
-			console.log(res);
-			updateTable(res);
+			createTable(res);
 		}
 		
 		else{
@@ -63,22 +62,56 @@ function addRow(){
 		
 	
 	};
+
+function deleteRow(theRow){
 	
-function updateTable(info){
+	var req = new XMLHttpRequest();
+	req.open("GET", "http://52.32.212.47:2500/delete-row?id=" + theRow, true);
+	if(req.status >= 200 && req.status < 400)
+	{
+		var res = JSON.parse(req.responseText);
+		createTable(res);
+	}
+	else{
+		console.log("Error in network request: " + req.statusText);
+	}
+}
 	
+/*function updateTable(info){
+		
+		var p = (info.length-1)
 		var newRow = document.createElement("TR");
 	
-		for(r in info[0]){
+		for(r in info[p]){
 			var newCell = document.createElement("TD");
-			newCell.innerHTML = info[0][r];
+			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
 		}
+		
+		var deleteButton = document.createElement("Input");
+		var updateButton = document.createElement("Input");
+		
+		deleteButton.setAttribute("type", "button");
+		deleteButton.setAttribute("id", info[p].id);
+		deleteButton.setAttribute("onclick", deleteRow(info[p].id));
+		deleteButton.value = "Delete exercise";
+		updateButton.setAttribute("type", "button");
+		updateButton.setAttribute("id", info[p].id);
+		updateButton.value = "Update exercise";
+		
+		newRow.appendChild(deleteButton);
+		newRow.appendChild(updateButton);
+		
 		document.getElementById("myTable").appendChild(newRow);
-	}
+	}*/
 	
 	
 function createTable(info){
-	
+
+	var myNode = document.getElementById("myTable");
+	while(myNode.firstChild){
+		myNode.removeChild(myNode.firstChild);
+	}
 	for(p in info){
 	var newRow = document.createElement("TR");
 	
@@ -87,10 +120,21 @@ function createTable(info){
 			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
 		}
-		var deleteButton = document.createElement("button");
-		var updateButton = document.createElement("button");
+		var deleteButton = document.createElement("Input");
+		var updateButton = document.createElement("Input");
+		
+		deleteButton.setAttribute("type", "button");
+		deleteButton.setAttribute("id", info[p].id);
+		deleteButton.setAttribute("onclick", deleteRow(info[p].id));
+		deleteButton.value = "Delete exercise";
+		updateButton.setAttribute("type", "button");
+		updateButton.setAttribute("id", info[p].id);
+		updateButton.value = "Update exercise";
+
+		
 		newRow.appendChild(deleteButton);
 		newRow.appendChild(updateButton);
+
 		document.getElementById("myTable").appendChild(newRow);
 	}
 		

@@ -24,7 +24,7 @@ app.get("/", function(req, res, next){
 });
 
 app.get("/all", function(req, res, next){
-	var context = {};
+	
 	pool.query("SELECT * FROM workouts", function(err, rows, fields){
 		if(err){
 			next(err);
@@ -46,14 +46,40 @@ app.post("/add-item", function(req, res, next){
 		lbs: req.query.lbs
 	}
 	
-	pool.query("INSERT INTO workouts (name, reps, weight, date, lbs) VALUES (?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
+	pool.query("INSERT INTO workouts SET ?", payload, function(err, rows, fields){
+		if(err){
+			next(err);
+			return;
+		}
+	});
+		
+	pool.query("SELECT * FROM workouts", function(err, rows, fields){
+		if(err){
+			next(err);
+			return;
+		}
+
+		res.send(JSON.stringify(rows));
+	});
+	
+});
+
+app.get("/delete-row", function(req, res, next){
+	
+	pool.query("DELETE FROM workouts WHERE id = ?", [req.query.id], function(err, rows, fields){
+		if(err){
+			next(err);
+			return;
+		}
+	});
+	
+	pool.query("SELECT * FROM workouts", function(err, rows, fields){
 		if(err){
 			next(err);
 			return;
 		}
 		
-
-		res.send(JSON.stringify(result));
+		res.send(JSON.stringify(rows));
 	});
 	
 });
