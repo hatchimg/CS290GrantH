@@ -12,6 +12,8 @@ req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
 			createTable(res);
+			var deleteButtons = document.getElementsByName("deleteButton");
+			bindDelete(deleteButtons);
 		}
 		
 		else{
@@ -23,6 +25,13 @@ req.addEventListener('load', function(){
 
 }
 
+function bindDelete(theButtons){
+	
+	for (i = 0; i < theButtons.length; i++){
+		var theID = theButtons[i].id;
+		theButtons[i].onclick = deleteRow(theID);
+	}
+}
 
 
 function addRow(){
@@ -130,19 +139,13 @@ function createTable(info){
 			newRow.appendChild(newCell);
 			}
 		}
-		var buttonFunction = function(x){
-			return function(){
-				var deleteID = info[x].id;
-			};
-		}(p);
-		buttonFunction();
+
 		var deleteButton = document.createElement("Input");
 		var updateButton = document.createElement("Input");
 		
 		deleteButton.setAttribute("name", "deleteButton");
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.onclick = deleteRow(deleteID);
 		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
