@@ -23,10 +23,7 @@ req.addEventListener('load', function(){
 
 }
 
-document.getElementById("deleteButton").addEventListener("click", function(){
-	var theID = document.getElementById("deleteButton").parentNode.id;
-	deleteRow(theID);
-}
+
 
 function addRow(){
 
@@ -134,6 +131,7 @@ function createTable(info){
 		var deleteButton = document.createElement("Input");
 		var updateButton = document.createElement("Input");
 		
+		deleteButton.setAttribute("name", "deleteButton");
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
 		deleteButton.value = "Delete exercise";
@@ -147,5 +145,13 @@ function createTable(info){
 
 		document.getElementById("myTable").appendChild(newRow);
 	}
-		
+
+var buttonList = document.getElementsByName("deleteButton");
+for(i in buttonList){
+buttonList[i].addEventListener("click", function(){
+	var theID = buttonList[i].parentNode.id;
+	deleteRow(theID);
+}
+});
+	
 	}
