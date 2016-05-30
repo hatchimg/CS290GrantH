@@ -78,7 +78,9 @@ function deleteRow(theRow){
 	else{
 		console.log("Error in network request: " + req.statusText);
 	}
+	
 	});
+	req.send(null);
 }
 	
 /*function updateTable(info){
@@ -128,12 +130,19 @@ function createTable(info){
 			newRow.appendChild(newCell);
 			}
 		}
+		var buttonFunction = function(x){
+			return function(){
+				var deleteID = info[x].id;
+			};
+		}(p);
+		buttonFunction();
 		var deleteButton = document.createElement("Input");
 		var updateButton = document.createElement("Input");
 		
 		deleteButton.setAttribute("name", "deleteButton");
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
+		deleteButton.onclick = deleteRow(deleteID);
 		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
@@ -146,12 +155,6 @@ function createTable(info){
 		document.getElementById("myTable").appendChild(newRow);
 	}
 
-var buttonList = document.getElementsByName("deleteButton");
-for(i in buttonList){
-buttonList[i].addEventListener("click", function(){
-	var theID = buttonList[i].parentNode.id;
-	deleteRow(theID);
-}
-});
+
 	
 	}
