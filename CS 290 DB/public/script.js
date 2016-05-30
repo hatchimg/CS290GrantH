@@ -112,14 +112,15 @@ function deleteRow(theRow){
 function createTable(info){
 
 	var myNode = document.getElementById("myTable");
-	while(myNode.lastChild.textContent == "row" ){
+	while(myNode.lastChild.id == "row" ){
 		myNode.removeChild(myNode.lastChild);
 	}
 	for(p in info){
 	var newRow = document.createElement("TR");
-	newRow.textContent = "row";
+	newRow.setAttribute("id", "row");
 	
 		for(r in info[p]){
+			
 			var newCell = document.createElement("TD");
 			newCell.innerHTML = info[p][r];
 			newRow.appendChild(newCell);
@@ -129,7 +130,9 @@ function createTable(info){
 		
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.addEventListener('click', deleteRow(info[p].id));
+		deleteButton.addEventListener('click', function(){
+		deleteRow(info[p].id);
+		});
 		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
