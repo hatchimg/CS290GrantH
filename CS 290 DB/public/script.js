@@ -12,8 +12,7 @@ req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
 			var res = JSON.parse(req.responseText);
 			createTable(res);
-			var deleteButtons = document.getElementsByName("deleteButton");
-			bindDelete(deleteButtons);
+
 		}
 		
 		else{
@@ -58,6 +57,7 @@ function addRow(){
 	
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
+			document.getElementById("newEx").reset();
 			var res = JSON.parse(req.responseText);
 			createTable(res);
 		}
@@ -159,5 +159,7 @@ function createTable(info){
 	}
 
 
-	
+
+	var deleteButtons = document.getElementsByName("deleteButton");
+	bindDelete(deleteButtons);
 	}
