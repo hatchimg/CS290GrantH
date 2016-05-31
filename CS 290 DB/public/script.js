@@ -73,7 +73,7 @@ function addRow(){
 	});
 	
 	req.send(JSON.stringify(payload));
-	document.getElementById("newEx").reset();
+	
 		
 	
 	};
@@ -167,4 +167,5 @@ function createTable(info){
 
 	var deleteButtons = document.getElementsByName("deleteButton");
 	bindDelete(deleteButtons);
+	document.getElementById("newEx").reset();
 	}
