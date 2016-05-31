@@ -24,13 +24,21 @@ req.addEventListener('load', function(){
 
 }
 
-function bindDelete(theButtons){
+function bindDelete(theButtons, theUpdates){
 	
 	for (i = 0; i < theButtons.length; i++){
 		
 		theButtons[i].addEventListener("click", function(x){
 			return function(){
 			deleteRow(theButtons[x].id);
+			};
+		}(i));
+		} 
+	for (i = 0; i < theUpdates.length; i++){
+		
+		theButtons[i].addEventListener("click", function(x){
+			return function(){
+			updateRow(theButtons[x].id);
 			};
 		}(i));
 		} 
@@ -77,6 +85,11 @@ function addRow(){
 		
 	
 	};
+	
+function updateRow(theRow){
+	
+console.log("this would update row " + theRow);
+}
 
 function deleteRow(theRow){
 	
@@ -152,6 +165,7 @@ function createTable(info){
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
 		deleteButton.value = "Delete exercise";
+		updateButton.setAttribute("name", "updateButton");
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
 		updateButton.value = "Update exercise";
@@ -166,6 +180,7 @@ function createTable(info){
 
 
 	var deleteButtons = document.getElementsByName("deleteButton");
-	bindDelete(deleteButtons);
+	var updateButtons = document.getElementsByName("updateButton");
+	bindDelete(deleteButtons, updateButtons);
 	document.getElementById("newEx").reset();
 	}
