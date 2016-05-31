@@ -124,12 +124,12 @@ function deleteRow(theRow){
 function createTable(info){
 
 	var myNode = document.getElementById("myTable");
-	while(myNode.lastChild.name == "row" ){
+	while(myNode.lastChild.name == "datarow"){
 		myNode.removeChild(myNode.lastChild);
 	}
 	for(p in info){
 	var newRow = document.createElement("TR");
-	newRow.setAttribute("name", "row");
+	newRow.setAttribute("name", "datarow");
 	newRow.setAttribute("id", info[p].id);
 	
 		for(r in info[p]){
