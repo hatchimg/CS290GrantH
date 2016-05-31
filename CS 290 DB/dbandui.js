@@ -46,7 +46,7 @@ app.post("/add-item", function(req, res, next){
 		lbs: req.query.lbs
 	}
 	
-	pool.query("INSERT INTO workouts SET ?", payload, function(err, rows, fields){
+	pool.query("INSERT INTO workouts SET ?", payload, function(err, result){
 		if(err){
 			next(err);
 			return;

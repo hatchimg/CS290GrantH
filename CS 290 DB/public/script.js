@@ -57,7 +57,6 @@ function addRow(){
 	
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
-			document.getElementById("newEx").reset();
 			var res = JSON.parse(req.responseText);
 			createTable(res);
 		}
@@ -69,6 +68,7 @@ function addRow(){
 	});
 	
 	req.send(JSON.stringify(payload));
+	document.getElementById("newEx").reset();
 		
 	
 	};
@@ -135,7 +135,7 @@ function createTable(info){
 		for(r in info[p]){
 			if(r == "id"){}else{
 			var newCell = document.createElement("TD");
-			newCell.innerHTML = info[p][r];
+			newCell.textContent = info[p][r];
 			newRow.appendChild(newCell);
 			}
 		}
