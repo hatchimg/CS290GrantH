@@ -27,10 +27,15 @@ req.addEventListener('load', function(){
 function bindDelete(theButtons){
 	
 	for (i = 0; i < theButtons.length; i++){
-		var theID = theButtons[i].id;
-		theButtons[i].onclick = deleteRow(theID);
-	}
-}
+		
+		theButtons[i].addEventListener("click", function(x){
+			return function(){
+			deleteRow(theButtons[x].id);
+			};
+		}(i));
+		} 
+	};
+
 
 
 function addRow(){
@@ -124,7 +129,7 @@ function deleteRow(theRow){
 function createTable(info){
 
 	var myNode = document.getElementById("myTable");
-	while(myNode.lastChild.name == "datarow"){
+	while(myNode.childNodes.length > 2){
 		myNode.removeChild(myNode.lastChild);
 	}
 	for(p in info){
