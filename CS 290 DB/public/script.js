@@ -66,7 +66,7 @@ function addRow(){
 	payload.type = type;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + type, true);
+	req.open("GET", "http://52.32.212.47:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + type, true);
 	
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
@@ -80,8 +80,8 @@ function addRow(){
 		
 	});
 	
-	req.send(JSON.stringify(payload));
-	
+	//req.send(JSON.stringify(payload));
+	req.send(null);
 		
 	
 	};

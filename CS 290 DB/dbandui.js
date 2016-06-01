@@ -36,14 +36,14 @@ app.get("/all", function(req, res, next){
 });
 
 
-app.post("/add-item", function(req, res, next){
+app.get("/add-item", function(req, res, next){
 	
 	var payload = {
 		name: req.query.name,
 		reps: req.query.reps,
 		weight: req.query.weight,
 		date: req.query.date,
-		lbs: req.query.type
+		lbs: req.query.lbs
 	}
 	
 	pool.query("INSERT INTO workouts SET ?", payload, function(err, result){
