@@ -36,7 +36,7 @@ function bindDelete(theButtons, theUpdates){
 		} 
 	for (i = 0; i < theUpdates.length; i++){
 		
-		theButtons[i].addEventListener("click", function(x){
+		theUpdates[i].addEventListener("click", function(x){
 			return function(){
 			redirect(theButtons[x].id);
 			};
@@ -95,7 +95,7 @@ function redirect(theRow){
 	var req = new XMLHttpRequest();
 	req.open("GET", "http://52.32.212.47:2500/redirect?id=" + theRow, true);
 	
-	req.addEventListener('load', function(){
+	/*req.addEventListener('load', function(){
 	if(req.status >= 200 && req.status < 400)
 	{
 		console.log(req.status);
@@ -104,10 +104,10 @@ function redirect(theRow){
 		console.log("Error in network request: " + req.statusText);
 	}
 	
-	});
+	});*/
 	req.send(null);
 
-	//use {{}} stuff in handlebars to parse the context to populate fields in editRow (editName, editReps, etc.);
+
 }
 
 function deleteRow(theRow){

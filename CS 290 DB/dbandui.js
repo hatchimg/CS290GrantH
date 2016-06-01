@@ -43,7 +43,7 @@ app.post("/add-item", function(req, res, next){
 		reps: req.query.reps,
 		weight: req.query.weight,
 		date: req.query.date,
-		lbs: req.query.lbs
+		lbs: req.query.type
 	}
 	
 	pool.query("INSERT INTO workouts SET ?", payload, function(err, result){
@@ -67,21 +67,21 @@ app.post("/add-item", function(req, res, next){
 app.get("/redirect", function(req, res, next){
 	
 	var context = {};
-	var id = req.query.id;
 	
-	pool.query("SELECT * FROM workouts WHERE id=?", id, function(err, rows, fields){
+	pool.query("SELECT * FROM workouts WHERE id = ?", [req.query.id], function(err, rows, fields){
 		if(err){
 			next(err);
 			return;
 		}
+		
+	context.info = JSON.stringify(rows);
+	res.render("editRow", context);
 	});
 	
-	context.info = JSON.stringify(rows));
-	res.render("editRow", context);
-	
+		
 });
 
-app.post("/edit-row", function(req, res, next){
+app.post("/edit-the-row", function(req, res, next){
 	
 	var payload = {
 		name: req.query.name,
