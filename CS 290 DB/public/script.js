@@ -58,15 +58,15 @@ function addRow(){
 	var date = document.getElementById("date").value;
 	var lbs = document.getElementById("unit").value;
 	
-	var payload = {name: null, reps: null, weight: null, date: null, lbs: null};
+	/*var payload = {name: null, reps: null, weight: null, date: null, lbs: null};
 	payload.name = name;
 	payload.reps = reps;
 	payload.weight = weight;
 	payload.date = date;
-	payload.lbs = lbs;
+	payload.lbs = lbs;*/
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/add-item?name="/*+ name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + type*/, true);
+	req.open("POST", "http://52.32.212.47:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs, true);
 	
 	req.addEventListener('load', function(){
 		if(req.status >= 200 && req.status < 400){
@@ -80,7 +80,7 @@ function addRow(){
 		
 	});
 	
-	req.send(JSON.stringify(payload));
+	req.send(null);
 	
 		
 	
