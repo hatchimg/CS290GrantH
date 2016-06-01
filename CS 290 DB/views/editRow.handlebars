@@ -1,0 +1,25 @@
+<script src = "script.js"></script>
+
+<h1>Welcome to your workout tracker</h1>
+ 
+<form id = "editEx">
+<fieldset>
+<legend>Edit exercise</legend>
+		Name: <input type = "text" name = "editName" id = "name" value = {{info.name}}></input><br><br>
+		Reps: <input type = "number" name = "editReps" id = "reps" value = {{info.reps}}></input><br><br>
+		Weight: <input type = "text" name = "editWeight" id = "weight" value = {{info.weight}}></input><br><br>
+		Date (YYYY-MM-DD): <input type = "text" name = "editDate" id = "date" value = {{info.date}}></input><br><br>
+		Lbs/Kgs: <input type = "radio" name = "unit" id = "editUnitTrue" value = "true"></input>Lbs <input type = "radio" name = "unit" id = "editUnitFalse" value = "false"></input> Kgs <br><br>
+		<input type = "button" name = "submitEdit" value = "Save changes" onclick = "updateRow()"></input>
+
+</fieldset>
+</form>
+
+<script>
+		if({{info.unit}} == 1){
+			document.getElementByID("editUnitTrue").checked;
+		}
+		else{
+			document.getElementByID("editUnitFalse").checked;
+		}
+</script>

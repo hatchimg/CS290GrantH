@@ -64,6 +64,44 @@ app.post("/add-item", function(req, res, next){
 	
 });
 
+app.get("/redirect", function(req, res, next){
+	
+	var context = {};
+	var id = req.query.id;
+	
+	pool.query("SELECT * FROM workouts WHERE id=?", id, function(err, rows, fields){
+		if(err){
+			next(err);
+			return;
+		}
+	});
+	
+	context.info = JSON.stringify(rows));
+	res.render("editRow", context);
+	
+});
+
+app.post("/edit-row", function(req, res, next){
+	
+	var payload = {
+		name: req.query.name,
+		reps: req.query.reps,
+		weight: req.query.weight,
+		date: req.query.date,
+		lbs: req.query.lbs
+	}
+	
+		pool.query("UPDATE workouts SET ?", payload, function(err, result){
+		if(err){
+			next(err);
+			return;
+		}
+	});
+	
+	res.render("dbandui");
+});
+
+
 app.get("/delete-row", function(req, res, next){
 	
 	pool.query("DELETE FROM workouts WHERE id = ?", [req.query.id], function(err, rows, fields){
