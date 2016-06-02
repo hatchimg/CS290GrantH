@@ -79,8 +79,8 @@ app.get("/redirect", function(req, res, next){
 			return;
 		}
 		
-	context.info = rows[0];
-	res.render("editRow", context.info);
+	context = rows[0];
+	res.render("editRow", context);
 	});
 	
 		
@@ -88,11 +88,7 @@ app.get("/redirect", function(req, res, next){
 
 app.post("/", function(req, res, next){
 	
-	var params = [];
-	for (var p in req.query){
-		params.push({'name':p, 'value': req.query[p]})
-	}
-		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [params[0].value, params[1].value, params[2].value, params[3].value, params[4].value, params[5].value, function(err, result){
+		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body.editName, req.body.editReps, req.body.editWeight, req.body.editDate, req.body.editLbs, req.body.rowID], function(err, result){
 		if(err){
 			next(err);
 			return;

@@ -7,13 +7,13 @@
 <fieldset>
 <legend>Edit exercise</legend>
 
-		Name: <input type = "text" name = "editName" id = "editName" value = "{{info.name}}"></input><br><br>
-		Reps: <input type = "number" name = "editReps" id = "editReps" value = "{{info.reps}}"></input><br><br>
-		Weight: <input type = "text" name = "editWeight" id = "editWeight" value = "{{info.weight}}"></input><br><br>
-		Date (YYYY-MM-DD): <input type = "text" name = "editDate" id = "editDate" value = "{{info.date}}"></input><br><br>
-		Lbs/Kgs (1 for Lbs, 0 for Kgs): <input type = "text" name = "editLbs" id = "editLbs" value = "{{info.lbs}}"></input><br><br>
-				<input id = rowID value = "{{info.id}}" hidden></input>
-		<input type = "submit" name = "submitEdit" id = "submitEdit" value = "Save changes" onclick = "{{info.id}}"></input>
+		Name: <input type = "text" name = "editName" id = "editName" value = "{{name}}"></input><br><br>
+		Reps: <input type = "number" name = "editReps" id = "editReps" value = "{{reps}}"></input><br><br>
+		Weight: <input type = "text" name = "editWeight" id = "editWeight" value = "{{weight}}"></input><br><br>
+		Date (MUST CHANGE TO YYYY-MM-DD FORMAT BEFORE SUBMITTING): <input type = "text" name = "editDate" id = "editDate" value = "{{date}}"></input><br><br>
+		Lbs/Kgs (1 for Lbs, 0 for Kgs): <input type = "text" name = "editLbs" id = "editLbs" value = "{{lbs}}"></input><br><br>
+				<input name = "rowID" id = "rowID" value = "{{id}}" hidden></input>
+		<input type = "submit" name = "submitEdit" id = "submitEdit" value = "Save changes"></input>
 
 </fieldset>
 </form>
