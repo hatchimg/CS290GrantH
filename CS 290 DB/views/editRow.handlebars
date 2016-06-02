@@ -1,16 +1,16 @@
 <script src = "script.js"></script>
 
-<h1>Welcome to your workout tracker</h1>
+<h1>Edit an exercise</h1>
  
 <form id = "editEx">
 <fieldset>
 <legend>Edit exercise</legend>
-		Name: <input type = "text" name = "editName" id = "editName" value = {{info.name}}></input><br><br>
-		Reps: <input type = "number" name = "editReps" id = "editReps" value = {{info.reps}}></input><br><br>
-		Weight: <input type = "text" name = "editWeight" id = "editWeight" value = {{info.weight}}></input><br><br>
-		Date (YYYY-MM-DD): <input type = "text" name = "editDate" id = "editDate" value = {{info.date}}></input><br><br>
+		Name: <input type = "text" name = "editName" id = "editName" value = "{{info.name}}"></input><br><br>
+		Reps: <input type = "number" name = "editReps" id = "editReps" value = "{{info.reps}}"></input><br><br>
+		Weight: <input type = "text" name = "editWeight" id = "editWeight" value = "{{info.weight}}"></input><br><br>
+		Date (YYYY-MM-DD): <input type = "text" name = "editDate" id = "editDate" value = "{{info.date}}"></input><br><br>
 		Lbs/Kgs: <input type = "radio" name = "editUnit" id = "editUnit" value = "true"></input>Lbs <input type = "radio" name = "editUnit" id = "editUnit" value = "false"></input> Kgs <br><br>
-		<input type = "button" name = "submitEdit" value = "Save changes" onclick = "updateRow(89)"></input>
+		<input type = "button" name = "submitEdit" value = "Save changes" onclick = "{{info.id}}"></input>
 
 </fieldset>
 </form>

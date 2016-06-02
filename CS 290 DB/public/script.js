@@ -95,7 +95,7 @@ function updateRow(theID){
 	payload.lbs = newLbs;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs=" = newLbs, true)
+	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs=" + newLbs, true)
 	req.send(null);
 	
 }
@@ -199,12 +199,12 @@ if(document.getElementById("myTable"))
 		deleteButton.setAttribute("name", "deleteButton");
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.textContent = "Delete exercise";
+		deleteButton.value = "Delete exercise";
 		updateButton.setAttribute("name", "updateButton");
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
-		updateButton.textContent = "Update exercise";
-		updateLink.appendChild("updateButton");
+		updateButton.value = "Update exercise";
+		updateLink.appendChild(updateButton);
 
 		
 		newRow.appendChild(deleteButton);
@@ -216,7 +216,6 @@ if(document.getElementById("myTable"))
 
 
 	var deleteButtons = document.getElementsByName("deleteButton");
-	//var updateButtons = document.getElementsByName("updateLink");
 	bindDelete(deleteButtons);
 	document.getElementById("newEx").reset();
 	}
