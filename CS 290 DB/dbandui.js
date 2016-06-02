@@ -75,14 +75,14 @@ app.get("/redirect", function(req, res, next){
 			return;
 		}
 		
-	context.info = JSON.stringify(rows);
-	res.render("editRow", context);
+	context.info = rows[0];
+	res.render("editRow", context.info);
 	});
 	
 		
 });
 
-app.post("/edit-the-row", function(req, res, next){
+app.post("/", function(req, res, next){
 	
 		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs, req.query.id], function(err, result){
 		if(err){

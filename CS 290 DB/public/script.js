@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", loadTable);
 
+document.getElementById("submitEdit").addEventListener("click", updateRow(document.getElementById("rowID")));
 
 
 function loadTable(){
@@ -49,14 +50,15 @@ function addRow(){
 	var reps = document.getElementById("reps").value;
 	var weight = document.getElementById("weight").value;
 	var date = document.getElementById("date").value;
-	var lbs = document.getElementById("unit").checked;
 	
-	/*var payload = {name: null, reps: null, weight: null, date: null, lbs: null};
-	payload.name = name;
-	payload.reps = reps;
-	payload.weight = weight;
-	payload.date = date;
-	payload.lbs = lbs;*/
+	var radioResults = getElementByName("lbs");
+	for(i = 0; i < radioResults; i++){
+		if (radioResults[i].checked){
+			var lbs = radioResults[i].value;
+		}
+	}
+
+	
 	
 	var req = new XMLHttpRequest();
 	req.open("POST", "http://52.32.212.47:2500/add-item?name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs, true);
@@ -84,7 +86,7 @@ function updateRow(theID){
 	var newReps = document.getElementById("editReps").value;
 	var newWeight = document.getElementById("editWeight").value;
 	var newDate = document.getElementById("editDate").value;
-	var newLbs = document.getElementById("editUnit").checked;
+	var newLbs = document.getElementById("editLbs").value;
 	
 	var payload = {id: null, name: null, reps: null, weight: null, date: null, lbs: null};
 	payload.id = theID;
@@ -95,7 +97,7 @@ function updateRow(theID){
 	payload.lbs = newLbs;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs=" + newLbs, true)
+	req.open("POST", "http://52.32.212.47:2500/?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs=" + newLbs, true)
 	req.send(null);
 	
 }
@@ -138,34 +140,6 @@ function deleteRow(theRow){
 	});
 	req.send(null);
 }
-	
-/*function updateTable(info){
-		
-		var p = (info.length-1)
-		var newRow = document.createElement("TR");
-	
-		for(r in info[p]){
-			var newCell = document.createElement("TD");
-			newCell.innerHTML = info[p][r];
-			newRow.appendChild(newCell);
-		}
-		
-		var deleteButton = document.createElement("Input");
-		var updateButton = document.createElement("Input");
-		
-		deleteButton.setAttribute("type", "button");
-		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.setAttribute("onclick", deleteRow(info[p].id));
-		deleteButton.value = "Delete exercise";
-		updateButton.setAttribute("type", "button");
-		updateButton.setAttribute("id", info[p].id);
-		updateButton.value = "Update exercise";
-		
-		newRow.appendChild(deleteButton);
-		newRow.appendChild(updateButton);
-		
-		document.getElementById("myTable").appendChild(newRow);
-	}*/
 	
 	
 function createTable(info){
