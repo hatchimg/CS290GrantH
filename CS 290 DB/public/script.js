@@ -38,7 +38,7 @@ function bindDelete(theButtons, theUpdates){
 		
 		theUpdates[i].addEventListener("click", function(x){
 			return function(){
-			theButtons[x].href = "/redirect&id=" + theButtons[x].id;
+			theUpdates[x].setAttribute("a href", "/redirect?id=" + theButtons[x].id);
 			};
 		}(i));
 		} 
@@ -93,7 +93,7 @@ function updateRow(theID){
 	var newDate = document.getElementById("editDate").value;
 	var newLbs = document.getElementById("editUnit").checked;
 	
-	var payload = {id: null, name: null, reps: null, weight: null, date: null, lbs: null);
+	var payload = {id: null, name: null, reps: null, weight: null, date: null, lbs: null};
 	payload.id = theID;
 	payload.name = newName;
 	payload.reps = newReps;
@@ -102,7 +102,8 @@ function updateRow(theID){
 	payload.lbs = newLbs;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/edit-the-row?name=")
+	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs" = newLbs, true)
+	req.send(null);
 	
 }
 
@@ -178,7 +179,7 @@ function createTable(info){
 
 if(document.getElementById)
 {
-	var myNode = document.getElementById("myTable"));
+	var myNode = document.getElementById("myTable");
 	while(myNode.childNodes.length > 2){
 		myNode.removeChild(myNode.lastChild);
 	}

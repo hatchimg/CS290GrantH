@@ -89,9 +89,10 @@ app.post("/edit-the-row", function(req, res, next){
 			next(err);
 			return;
 		}
+		res.render("dbandui");
 	});
 	
-	res.render("dbandui");
+	
 });
 
 
