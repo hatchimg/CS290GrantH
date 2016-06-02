@@ -24,7 +24,7 @@ req.addEventListener('load', function(){
 
 }
 
-function bindDelete(theButtons, theUpdates){
+function bindDelete(theButtons){
 	
 	for (i = 0; i < theButtons.length; i++){
 		
@@ -34,14 +34,7 @@ function bindDelete(theButtons, theUpdates){
 			};
 		}(i));
 		} 
-	for (i = 0; i < theUpdates.length; i++){
-		
-		theUpdates[i].addEventListener("click", function(x){
-			return function(){
-			theUpdates[x].setAttribute("a href", "/redirect?id=" + theButtons[x].id);
-			};
-		}(i));
-		} 
+	
 	};
 
 
@@ -102,7 +95,7 @@ function updateRow(theID){
 	payload.lbs = newLbs;
 	
 	var req = new XMLHttpRequest();
-	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs" = newLbs, true)
+	req.open("POST", "http://52.32.212.47:2500/edit-the-row?id=" + theID + "&name=" + newName + "&reps=" + newReps + "&weight=" + newWeight + "&date=" + newDate + "&lbs=" = newLbs, true)
 	req.send(null);
 	
 }
@@ -177,7 +170,7 @@ function deleteRow(theRow){
 	
 function createTable(info){
 
-if(document.getElementById)
+if(document.getElementById("myTable"))
 {
 	var myNode = document.getElementById("myTable");
 	while(myNode.childNodes.length > 2){
@@ -198,19 +191,24 @@ if(document.getElementById)
 
 		var deleteButton = document.createElement("Input");
 		var updateButton = document.createElement("Input");
+		var updateLink = document.createElement("a");
+		
+		updateLink.setAttribute("name", "updateLink");
+		updateLink.href = "/redirect?id=" + info[p].id;
 		
 		deleteButton.setAttribute("name", "deleteButton");
 		deleteButton.setAttribute("type", "button");
 		deleteButton.setAttribute("id", info[p].id);
-		deleteButton.value = "Delete exercise";
+		deleteButton.textContent = "Delete exercise";
 		updateButton.setAttribute("name", "updateButton");
 		updateButton.setAttribute("type", "button");
 		updateButton.setAttribute("id", info[p].id);
-		updateButton.value = "Update exercise";
+		updateButton.textContent = "Update exercise";
+		updateLink.appendChild("updateButton");
 
 		
 		newRow.appendChild(deleteButton);
-		newRow.appendChild(updateButton);
+		newRow.appendChild(updateLink);
 
 		document.getElementById("myTable").appendChild(newRow);
 	}
@@ -218,8 +216,8 @@ if(document.getElementById)
 
 
 	var deleteButtons = document.getElementsByName("deleteButton");
-	var updateButtons = document.getElementsByName("updateButton");
-	bindDelete(deleteButtons, updateButtons);
+	//var updateButtons = document.getElementsByName("updateLink");
+	bindDelete(deleteButtons);
 	document.getElementById("newEx").reset();
 	}
 }
