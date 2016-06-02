@@ -84,15 +84,7 @@ app.get("/redirect", function(req, res, next){
 
 app.post("/edit-the-row", function(req, res, next){
 	
-	var payload = {
-		name: req.query.name,
-		reps: req.query.reps,
-		weight: req.query.weight,
-		date: req.query.date,
-		lbs: req.query.lbs
-	}
-	
-		pool.query("UPDATE workouts SET ?", payload, function(err, result){
+		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs, req.query.id], function(err, result){
 		if(err){
 			next(err);
 			return;

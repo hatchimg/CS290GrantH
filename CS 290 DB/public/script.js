@@ -38,7 +38,7 @@ function bindDelete(theButtons, theUpdates){
 		
 		theUpdates[i].addEventListener("click", function(x){
 			return function(){
-			redirect(theButtons[x].id);
+			theButtons[x].href = "/redirect&id=" + theButtons[x].id;
 			};
 		}(i));
 		} 
@@ -56,7 +56,7 @@ function addRow(){
 	var reps = document.getElementById("reps").value;
 	var weight = document.getElementById("weight").value;
 	var date = document.getElementById("date").value;
-	var lbs = document.getElementById("unit").value;
+	var lbs = document.getElementById("unit").checked;
 	
 	/*var payload = {name: null, reps: null, weight: null, date: null, lbs: null};
 	payload.name = name;
@@ -86,8 +86,24 @@ function addRow(){
 	
 	};
 	
-function updateRow(){
-	//take values from form to assemble query string in post call to edit-row
+function updateRow(theID){
+	var newName = document.getElementById("editName").value;
+	var newReps = document.getElementById("editReps").value;
+	var newWeight = document.getElementById("editWeight").value;
+	var newDate = document.getElementById("editDate").value;
+	var newLbs = document.getElementById("editUnit").checked;
+	
+	var payload = {id: null, name: null, reps: null, weight: null, date: null, lbs: null);
+	payload.id = theID;
+	payload.name = newName;
+	payload.reps = newReps;
+	payload.weight = newWeight;
+	payload.date = newDate;
+	payload.lbs = newLbs;
+	
+	var req = new XMLHttpRequest();
+	req.open("POST", "http://52.32.212.47:2500/edit-the-row?name=")
+	
 }
 
 function redirect(theRow){
@@ -95,7 +111,7 @@ function redirect(theRow){
 	var req = new XMLHttpRequest();
 	req.open("GET", "http://52.32.212.47:2500/redirect?id=" + theRow, true);
 	
-	/*req.addEventListener('load', function(){
+	req.addEventListener('load', function(){
 	if(req.status >= 200 && req.status < 400)
 	{
 		console.log(req.status);
@@ -104,7 +120,7 @@ function redirect(theRow){
 		console.log("Error in network request: " + req.statusText);
 	}
 	
-	});*/
+	});
 	req.send(null);
 
 
@@ -160,7 +176,9 @@ function deleteRow(theRow){
 	
 function createTable(info){
 
-	var myNode = document.getElementById("myTable");
+if(document.getElementById)
+{
+	var myNode = document.getElementById("myTable"));
 	while(myNode.childNodes.length > 2){
 		myNode.removeChild(myNode.lastChild);
 	}
@@ -203,3 +221,4 @@ function createTable(info){
 	bindDelete(deleteButtons, updateButtons);
 	document.getElementById("newEx").reset();
 	}
+}
