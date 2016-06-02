@@ -88,7 +88,11 @@ app.get("/redirect", function(req, res, next){
 
 app.post("/", function(req, res, next){
 	
-		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body[name], req.body[reps], req.body[weight], req.body[date], req.body[lbs], req.body[id]], function(err, result){
+	var params = [];
+	for (var p in req.query){
+		params.push({'name':p, 'value': req.query[p]})
+	}
+		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [params[0].value, params[1].value, params[2].value, params[3].value, params[4].value, params[5].value, function(err, result){
 		if(err){
 			next(err);
 			return;
