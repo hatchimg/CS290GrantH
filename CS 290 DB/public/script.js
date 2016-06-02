@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", loadTable);
 
-document.getElementById("submitEdit").addEventListener("click", updateRow(document.getElementById("rowID")));
 
 
 function loadTable(){
@@ -51,8 +50,8 @@ function addRow(){
 	var weight = document.getElementById("weight").value;
 	var date = document.getElementById("date").value;
 	
-	var radioResults = getElementByName("lbs");
-	for(i = 0; i < radioResults; i++){
+	var radioResults = document.getElementsByName("lbs");
+	for(i = 0; i < radioResults.length; i++){
 		if (radioResults[i].checked){
 			var lbs = radioResults[i].value;
 		}

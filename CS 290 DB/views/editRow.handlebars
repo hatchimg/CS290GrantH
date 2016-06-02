@@ -2,10 +2,11 @@
 
 <h1>Edit an exercise</h1>
  
-<input id = rowID value = "{{info.id}}" hidden></input>
-<form id = "editEx">
+
+<form id = "editEx" action = "http://52.32.212.47:2500/" method = "post">
 <fieldset>
 <legend>Edit exercise</legend>
+		<input id = rowID value = "{{info.id}}" hidden></input>
 		Name: <input type = "text" name = "editName" id = "editName" value = "{{info.name}}"></input><br><br>
 		Reps: <input type = "number" name = "editReps" id = "editReps" value = "{{info.reps}}"></input><br><br>
 		Weight: <input type = "text" name = "editWeight" id = "editWeight" value = "{{info.weight}}"></input><br><br>

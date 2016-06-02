@@ -2,6 +2,10 @@ var express = require("express");
 var app = express();
 var mysql = require("mysql");
 var handlebars = require("express-handlebars").create({defaultLayout: "main"});
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.engine("handlebars", handlebars.engine);
 app.use(express.static("public"));
 
@@ -84,7 +88,7 @@ app.get("/redirect", function(req, res, next){
 
 app.post("/", function(req, res, next){
 	
-		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs, req.query.id], function(err, result){
+		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body[name], req.body[reps], req.body[weight], req.body[date], req.body[lbs], req.body[id]], function(err, result){
 		if(err){
 			next(err);
 			return;
